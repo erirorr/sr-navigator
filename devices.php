@@ -59,6 +59,7 @@ if ($_GET['edit']) // Editing the device | Редактирование агре
 			$dev_model=$model=$_POST['model'];
 			if ($_POST['model']=='SR-Train'){$modems='1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16';}
 			elseif ($_POST['model']=='SR-Box-8'){$modems='1,2,3,4,5,6,7,8';}
+			elseif ($_POST['model']=='SR-Box-8-Smart'){$modems='1,2,3,4,5,6,7,8';}
 			elseif ($_POST['model']=='SR-Box-8-Voice'){$modems='1,2,3,4,5,6,7,8';}
 			elseif ($_POST['model']=='SR-Box-2'){$modems='1,2,3,4,5,6,7,8';}
 			elseif ($_POST['model']=='SR-Box-1'){$modems='1,2,3,4,5,6,7,8';}
@@ -111,7 +112,7 @@ if ($_GET['edit']) // Editing the device | Редактирование агре
 					exit();
 				}
 			}
-			if ($model=='SR-Box-8' || $model=='SR-Board'){$_POST['modems']=$_POST['modems_box'];}
+			if ($model=='SR-Box-8' || $model=='SR-Box-8-Smart' || $model=='SR-Board'){$_POST['modems']=$_POST['modems_box'];}
 			else if ($model=='SR-Organizer')
 			{
 				$_POST['review']=$_POST['review_organizer'];
@@ -244,13 +245,14 @@ if ($status!=1 && $status!=2)
 <br><br>
 Модель (обязательное поле)
 <br>
-<select name="model" onchange="selectDevice(this,'SR-Train;SR-Nano-500;SR-Nano-1000;SR-Box-2;SR-Box-8;SR-Box-Bank;SR-Box-2-Bank;SR-Organizer;SR-Organizer-Smart;SR-Board');">
+<select name="model" onchange="selectDevice(this,'SR-Train;SR-Nano-500;SR-Nano-1000;SR-Box-2;SR-Box-8;SR-Box-8-Smart;SR-Box-Bank;SR-Box-2-Bank;SR-Organizer;SR-Organizer-Smart;SR-Board');">
 <option value="0">— Выберите модель агрегатора —</option>
 <option value="SR-Train"<? if ($model=='SR-Train'){echo ' selected=1';}?>>SR-Train</option>
 <option value="SR-Nano-500"<? if ($model=='SR-Nano-500'){echo ' selected=1';}?>>SR-Nano-500</option>
 <option value="SR-Nano-1000"<? if ($model=='SR-Nano-1000'){echo ' selected=1';}?>>SR-Nano-1000</option>
 <option value="SR-Box-2"<? if ($model=='SR-Box-2'){echo ' selected=1';}?>>SR-Box-2</option>
 <option value="SR-Box-8"<? if ($model=='SR-Box-8'){echo ' selected=1';}?>>SR-Box-8</option>
+<option value="SR-Box-8-Smart"<? if ($model=='SR-Box-8-Smart'){echo ' selected=1';}?>>SR-Box-8-Smart</option>
 <option value="SR-Box-Bank"<? if ($model=='SR-Box-Bank'){echo ' selected=1';}?>>SR-Box-Bank</option>
 <option value="SR-Box-2-Bank"<? if ($model=='SR-Box-2-Bank'){echo ' selected=1';}?>>SR-Box-Bank</option>
 <option value="SR-Organizer"<? if ($model=='SR-Organizer'){echo ' selected=1';}?>>SR-Organizer</option>
