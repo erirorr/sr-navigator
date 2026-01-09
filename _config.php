@@ -6,10 +6,10 @@
 // ===================================================================
 
 // --- MySQL ---
-$host="";
-$username="";
-$userpass="";
-$dbname="";
+$host = getenv('DB_HOST') ?: 'localhost';
+$username = getenv('DB_USER') ?: 'root';
+$userpass = getenv('DB_PASSWORD') ?: '';
+$dbname = getenv('DB_NAME') ?: 'simroulette';
 
 // -- Global ---
 $GLOBALS['sets'] = '

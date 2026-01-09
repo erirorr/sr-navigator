@@ -5,7 +5,7 @@
 // Copyright (c) 2016-2025 Sim Roulette, https://sim-roulette.com
 // ===================================================================
 $_SERVER['DOCUMENT_ROOT']='';
-$root="[path]";
+$root = __DIR__ . '/';
 include($root.'_func.php');
 
 if (!$_GET['token'] || strlen($_GET['token'])!=10){exit();} // Token verification | Проверка токена
@@ -24,7 +24,7 @@ if ($result = mysqli_query($db, "SELECT * FROM `devices` WHERE `token_remote`='"
 		exit(); 
 	}
 }
-if (!strlen($_GET['step']))
+if (!isset($_GET['step']) || !strlen($_GET['step']))
 {
 	include('link2.php');
 	exit();
