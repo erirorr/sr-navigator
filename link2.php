@@ -46,7 +46,7 @@ elseif (flagGet($id,'connect') && $_GET['data']=='REQUEST')
 } 
 
 // Saving the response received from the device | Сохранение полученного от агрегатора ответа
-if ($_GET['data']!='REQUEST')
+if ($_GET['data']!='REQUEST' && $_GET['data']!='')
 {
 	$data=json_decode($_GET['data']);
 	if ($data->dev && $data->event)

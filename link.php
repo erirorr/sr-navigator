@@ -11,7 +11,7 @@ include($root.'_func.php');
 if (!$_GET['token'] || strlen($_GET['token'])!=10){exit();} // Token verification | Проверка токена
 
 // Getting the device ID | Получение ID агрегатора
-if ($result = mysqli_query($db, "SELECT * FROM `devices` WHERE `token_remote`='".(int)$_GET['token']."'")) 
+if ($result = mysqli_query($db, "SELECT * FROM `devices` WHERE `token_remote`='".mysqli_real_escape_string($db, $_GET['token'])."'"))
 {
 	if ($row = mysqli_fetch_assoc($result))
 	{
