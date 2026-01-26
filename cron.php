@@ -7,11 +7,11 @@
 
 $license='free';
 $stime=time();
-if ((int)$argv[1]){sleep($argv[1]);}
+if (isset($argv[1]) && (int)$argv[1]){sleep($argv[1]);}
 
 $cron=1;
 
-$root="[path]";
+$root = __DIR__ . '/';
 include($root.'_func.php');
 
 $qry='';

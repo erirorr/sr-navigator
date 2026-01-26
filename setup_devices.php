@@ -41,7 +41,7 @@ if ($_GET['edit']) // Editing the device | Редактирование агре
 {
 	if ($_POST['save'] && $_POST['title'] && $_POST['model'])
 	{
-		if ($_POST['model']=='SR-Box-8'){$_POST['modems']=$_POST['modems_box'];}
+		if ($_POST['model']=='SR-Box-8' || $_POST['model']=='SR-Box-8-Smart'){$_POST['modems']=$_POST['modems_box'];}
 		else if ($_POST['model']=='SR-Organizer'){$_POST['modems']=$_POST['modems_organizer'];}
 		if ($_GET['edit']=='new')
 		{
@@ -108,7 +108,7 @@ if ($_GET['edit']) // Editing the device | Редактирование агре
 				if ($row['modems'])
 				{
 					$modems=$row['modems'];
-					if ($model=='SR-Box-8'){$modems_box=$modems;}
+					if ($model=='SR-Box-8' || $model=='SR-Box-8-Smart'){$modems_box=$modems;}
 					elseif ($model=='SR-Organizer'){$modems_organizer=$modems;}
 				}
 			}
@@ -132,12 +132,13 @@ if (!$status)
 <br><br>
 Модель (обязательное поле)
 <br>
-<select name="model" onchange="selectDevice(this,'SR-Train;SR-Nano-500;SR-Nano-1000;SR-Box-8;SR-Box-Bank;SR-Organizer');">
+<select name="model" onchange="selectDevice(this,'SR-Train;SR-Nano-500;SR-Nano-1000;SR-Box-8;SR-Box-8-Smart;SR-Box-Bank;SR-Organizer');">
 <option value="0">— Выберите модель агрегатора —</option>
 <option value="SR-Train"<? if ($model=='SR-Train'){echo ' selected=1';}?>>SR-Train</option>
 <option value="SR-Nano-500"<? if ($model=='SR-Nano-500'){echo ' selected=1';}?>>SR-Nano-500</option>
 <option value="SR-Nano-1000"<? if ($model=='SR-Nano-1000'){echo ' selected=1';}?>>SR-Nano-1000</option>
 <option value="SR-Box-8"<? if ($model=='SR-Box-8'){echo ' selected=1';}?>>SR-Box-8</option>
+<option value="SR-Box-8-Smart"<? if ($model=='SR-Box-8-Smart'){echo ' selected=1';}?>>SR-Box-8-Smart</option>
 <option value="SR-Box-Bank"<? if ($model=='SR-Box-Bank'){echo ' selected=1';}?>>SR-Box-Bank</option>
 <option value="SR-Organizer"<? if ($model=='SR-Organizer'){echo ' selected=1';}?>>SR-Organizer</option>
 </select>
@@ -172,7 +173,7 @@ if (!$status)
 <input type="text" name="modems_organizer" value="<?=$modems_organizer?>" maxlength="63">
 <br>
 </div>
-<div id="SR-Box-8" <? if ($model!='SR-Box-8'){echo 'style="display: none;"';}?>>
+<div id="SR-Box-8" <? if ($model!='SR-Box-8' && $model!='SR-Box-8-Smart'){echo 'style="display: none;"';}?>>
 <br>
 Модемы, котрые должны использоваться (через запятую)
 <br>

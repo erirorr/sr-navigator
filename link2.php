@@ -46,7 +46,7 @@ elseif (flagGet($id,'connect') && $_GET['data']=='REQUEST')
 } 
 
 // Saving the response received from the device | Сохранение полученного от агрегатора ответа
-if ($_GET['data']!='REQUEST')
+if ($_GET['data']!='REQUEST' && $_GET['data']!='')
 {
 	$data=json_decode($_GET['data']);
 	if ($data->dev && $data->event)
@@ -55,29 +55,24 @@ if ($_GET['data']!='REQUEST')
 		if ($data->dev && $data->event=='sms')
 		{
 			$place='';
-			if ($data->dev=="modem3")
-			{
-				$place='C'.$data->card;
-			}
-			else if ($data->dev=="modem2")
-			{
-				$place='B'.$data->card;
-			}
-			else
-			{
-				if ($data->card>16)
-				{
-					$place='C'.$data->card;
-				}
-				else if ($data->card>8)
-				{
-					$place='B'.$data->card;
-				}
-				else
-				{
-					$place='A'.$data->card;
+
+			// Extract modem number from string (e.g. "modem2" -> 2)
+			$modem_num = (int)str_replace('modem', '', $data->dev);
+
+			if ($modem_num > 0 && $modem_num <= 8) {
+				// SR-Box-8-Smart mapping: modem1->A, modem2->B, etc.
+				$place = chr(64 + $modem_num) . $data->card;
+			} else {
+				// Fallback / legacy logic for older devices or single modem
+				if ($data->card > 16) {
+					$place = 'C' . $data->card;
+				} else if ($data->card > 8) {
+					$place = 'B' . $data->card;
+				} else {
+					$place = 'A' . $data->card;
 				}
 			}
+
 			if (!$data->number){$data->number=-1;}
 			// Ищем номер карты
 			$qry='SELECT `id`,`number`,`email` FROM `cards` WHERE (`iccid`="'.$data->iccid.'" OR `number`="'.$data->number.'" OR `place`="'.$place.'") AND `device`='.$id;
